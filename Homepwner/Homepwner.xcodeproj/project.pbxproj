@@ -14,6 +14,9 @@
 		49A70DCD1B8FD36800129FFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A70DCC1B8FD36800129FFD /* Images.xcassets */; };
 		49A70DD01B8FD36800129FFD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A70DCE1B8FD36800129FFD /* LaunchScreen.xib */; };
 		49A70DDC1B8FD36800129FFD /* HomepwnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DDB1B8FD36800129FFD /* HomepwnerTests.m */; };
+		49A70DE71B90A18700129FFD /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DE61B90A18700129FFD /* BNRItemsViewController.m */; };
+		49A70DEA1B90A40600129FFD /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DE91B90A40600129FFD /* BNRItem.m */; };
+		49A70DED1B90A50800129FFD /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DEC1B90A50800129FFD /* BNRItemStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		49A70DD51B8FD36800129FFD /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A70DDA1B8FD36800129FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49A70DDB1B8FD36800129FFD /* HomepwnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerTests.m; sourceTree = "<group>"; };
+		49A70DE51B90A18700129FFD /* BNRItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemsViewController.h; sourceTree = "<group>"; };
+		49A70DE61B90A18700129FFD /* BNRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemsViewController.m; sourceTree = "<group>"; };
+		49A70DE81B90A40600129FFD /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
+		49A70DE91B90A40600129FFD /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
+		49A70DEB1B90A50800129FFD /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
+		49A70DEC1B90A50800129FFD /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +92,18 @@
 			children = (
 				49A70DC31B8FD36800129FFD /* AppDelegate.h */,
 				49A70DC41B8FD36800129FFD /* AppDelegate.m */,
-				49A70DC61B8FD36800129FFD /* ViewController.h */,
-				49A70DC71B8FD36800129FFD /* ViewController.m */,
-				49A70DC91B8FD36800129FFD /* Main.storyboard */,
+				49A70DE81B90A40600129FFD /* BNRItem.h */,
+				49A70DE91B90A40600129FFD /* BNRItem.m */,
+				49A70DEB1B90A50800129FFD /* BNRItemStore.h */,
+				49A70DEC1B90A50800129FFD /* BNRItemStore.m */,
+				49A70DE51B90A18700129FFD /* BNRItemsViewController.h */,
+				49A70DE61B90A18700129FFD /* BNRItemsViewController.m */,
 				49A70DCC1B8FD36800129FFD /* Images.xcassets */,
 				49A70DCE1B8FD36800129FFD /* LaunchScreen.xib */,
+				49A70DC91B8FD36800129FFD /* Main.storyboard */,
 				49A70DBF1B8FD36800129FFD /* Supporting Files */,
+				49A70DC61B8FD36800129FFD /* ViewController.h */,
+				49A70DC71B8FD36800129FFD /* ViewController.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -221,7 +236,10 @@
 			files = (
 				49A70DC81B8FD36800129FFD /* ViewController.m in Sources */,
 				49A70DC51B8FD36800129FFD /* AppDelegate.m in Sources */,
+				49A70DEA1B90A40600129FFD /* BNRItem.m in Sources */,
+				49A70DE71B90A18700129FFD /* BNRItemsViewController.m in Sources */,
 				49A70DC21B8FD36800129FFD /* main.m in Sources */,
+				49A70DED1B90A50800129FFD /* BNRItemStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
