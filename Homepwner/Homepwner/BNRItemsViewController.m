@@ -12,10 +12,13 @@
 
 @interface BNRItemsViewController ()
 
+@property (nonatomic,strong) IBOutlet UIView *headerView;
+
 @end
 
 @implementation BNRItemsViewController
 
+#pragma mark - init
 - (instancetype)init{
     return [self initWithStyle:UITableViewStylePlain];
 }
@@ -24,14 +27,15 @@
     self = [super initWithStyle:UITableViewStylePlain];
     
     if (self) {
-        for (int i = 0; i < 5; i++) {
-            [[BNRItemStore sharedStore] createItem];
-        }
+//        for (int i = 0; i < 5; i++) {
+//            [[BNRItemStore sharedStore] createItem];
+//        }
     }
     
     return self;
 }
 
+#pragma mark - methods
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,11 +47,57 @@
     
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
+    
+    UIView *header = self.headerView;
+    [self.tableView setTableHeaderView:header];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - headerview
+- (UIView *)headerView{
+    if (!_headerView) {
+        //加载即可，插座变量已经关联
+        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
+                                      owner:self
+                                    options:nil];
+    }
+    
+    return _headerView;
+}
+
+- (IBAction)addNewItem:(id)sender{
+    BNRItem *item = [[BNRItemStore sharedStore] createItem];
+    
+    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:item];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow
+                                                inSection:0];
+    
+    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationTop];
+    
+    //重新加载所有数据
+//    [self.tableView reloadData];
+}
+
+- (IBAction)toggleEditingMode:(id)sender{
+    if (self.isEditing) {
+        [sender setTitle:@"Edit"
+                forState:UIControlStateNormal];
+        
+        [self setEditing:NO
+                  animated:YES];
+    } else {
+        [sender setTitle:@"Done"
+                forState:UIControlStateNormal];
+        
+        [self setEditing:YES
+                  animated:YES];
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -64,7 +114,6 @@
     return [[[BNRItemStore sharedStore] allItems] count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
                                                             forIndexPath:indexPath];
@@ -78,7 +127,6 @@
     return cell;
 }
 
-
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -87,23 +135,34 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//    }
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        NSArray *items = [[BNRItemStore sharedStore] allItems];
+        BNRItem *item = items[indexPath.row];
+        [[BNRItemStore sharedStore] removeItem:item];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+    }    
 }
-*/
 
-/*
 // Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+      toIndexPath:(NSIndexPath *)toIndexPath {
+    [[BNRItemStore sharedStore] moveItemAtIndex:fromIndexPath.row
+                                        toIndex:toIndexPath.row];
 }
-*/
+
 
 /*
 // Override to support conditional rearranging of the table view.

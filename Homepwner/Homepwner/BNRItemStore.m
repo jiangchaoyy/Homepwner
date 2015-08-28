@@ -17,7 +17,7 @@
 
 @implementation BNRItemStore
 
-#pragma make - Singleton
+#pragma mark - Singleton
 //单例模式
 + (instancetype)sharedStore{
     static BNRItemStore *sharedStore = nil;
@@ -29,7 +29,7 @@
     return sharedStore;
 }
 
-#pragma make - init
+#pragma mark - init
 - (instancetype)init{
     @throw [NSException exceptionWithName:@"Singleton"
                                    reason:@"Use + [BNRItemStore sharedStore]"
@@ -47,18 +47,36 @@
     return self;
 }
 
-#pragma make - property
+#pragma mark - property
 //覆盖取方法，返回可变类型：此处虽然返回是可变类型，但在使用时，应遵循头文件中声明的类型。声明为不可变，即应该按照不可变类型操作，即使返回的是可变类型。否则容易混乱。
 - (NSArray *)allItems{
     return self.privateItems;
 }
 
-#pragma make - methods
+#pragma mark - methods
 
 - (BNRItem *)createItem{
     BNRItem *item = [BNRItem randomItem];
     [self.privateItems addObject:item];
     return item;
+}
+
+- (void)removeItem:(BNRItem *)item{
+    [self.privateItems removeObjectIdenticalTo:item];
+}
+
+- (void)moveItemAtIndex:(NSInteger)fromIndex
+                toIndex:(NSInteger)toIndex{
+    if (fromIndex == toIndex) {
+        return;
+    }
+    
+    BNRItem *item = self.privateItems[fromIndex];
+    
+    [self.privateItems removeObjectAtIndex:fromIndex];
+    
+    [self.privateItems insertObject:item
+                            atIndex:toIndex];
 }
 
 @end
