@@ -9,10 +9,9 @@
 #import "BNRItemsViewController.h"
 #import "BNRItem.h"
 #import "BNRItemStore.h"
+#import "BNRDetailViewController.h"
 
 @interface BNRItemsViewController ()
-
-@property (nonatomic,strong) IBOutlet UIView *headerView;
 
 @end
 
@@ -27,12 +26,24 @@
     self = [super initWithStyle:UITableViewStylePlain];
     
     if (self) {
-//        for (int i = 0; i < 5; i++) {
-//            [[BNRItemStore sharedStore] createItem];
-//        }
+        UINavigationItem *navItem = self.navigationItem;
+        navItem.title = @"Homepwner";
+        
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                             target:self
+                                                                             action:@selector(addNewItem:)];
+        navItem.rightBarButtonItem = bbi;
+        
+        navItem.leftBarButtonItem = self.editButtonItem;
     }
     
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - methods
@@ -46,27 +57,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self.tableView registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:@"UITableViewCell"];
-    
-    UIView *header = self.headerView;
-    [self.tableView setTableHeaderView:header];
+           forCellReuseIdentifier:@"UITableViewCell"];    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - headerview
-- (UIView *)headerView{
-    if (!_headerView) {
-        //加载即可，插座变量已经关联
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
-                                      owner:self
-                                    options:nil];
-    }
-    
-    return _headerView;
 }
 
 - (IBAction)addNewItem:(id)sender{
@@ -81,23 +77,6 @@
     
     //重新加载所有数据
 //    [self.tableView reloadData];
-}
-
-- (IBAction)toggleEditingMode:(id)sender{
-    if (self.isEditing) {
-        [sender setTitle:@"Edit"
-                forState:UIControlStateNormal];
-        
-        [self setEditing:NO
-                  animated:YES];
-    } else {
-        [sender setTitle:@"Done"
-                forState:UIControlStateNormal];
-        
-        [self setEditing:YES
-                  animated:YES];
-    }
-    
 }
 
 #pragma mark - Table view data source
@@ -152,7 +131,7 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
-    }    
+    }
 }
 
 // Override to support rearranging the table view.
@@ -163,6 +142,17 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
                                         toIndex:toIndexPath.row];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+    
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    BNRItem *selectedItem = items[indexPath.row];
+    
+    detailViewController.item = selectedItem;
+    
+    [self.navigationController pushViewController:detailViewController
+                                         animated:YES];
+}
 
 /*
 // Override to support conditional rearranging of the table view.

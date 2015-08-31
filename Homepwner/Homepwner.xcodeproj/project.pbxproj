@@ -17,7 +17,8 @@
 		49A70DE71B90A18700129FFD /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DE61B90A18700129FFD /* BNRItemsViewController.m */; };
 		49A70DEA1B90A40600129FFD /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DE91B90A40600129FFD /* BNRItem.m */; };
 		49A70DED1B90A50800129FFD /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DEC1B90A50800129FFD /* BNRItemStore.m */; };
-		49A70DEF1B90AD8600129FFD /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A70DEE1B90AD8600129FFD /* HeaderView.xib */; };
+		49A70DF61B930BC800129FFD /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A70DF41B930BC800129FFD /* BNRDetailViewController.m */; };
+		49A70DF71B930BC800129FFD /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A70DF51B930BC800129FFD /* BNRDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,9 @@
 		49A70DE91B90A40600129FFD /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		49A70DEB1B90A50800129FFD /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
 		49A70DEC1B90A50800129FFD /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
-		49A70DEE1B90AD8600129FFD /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		49A70DF31B930BC800129FFD /* BNRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
+		49A70DF41B930BC800129FFD /* BNRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
+		49A70DF51B930BC800129FFD /* BNRDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,13 +97,15 @@
 			children = (
 				49A70DC31B8FD36800129FFD /* AppDelegate.h */,
 				49A70DC41B8FD36800129FFD /* AppDelegate.m */,
+				49A70DF31B930BC800129FFD /* BNRDetailViewController.h */,
+				49A70DF41B930BC800129FFD /* BNRDetailViewController.m */,
+				49A70DF51B930BC800129FFD /* BNRDetailViewController.xib */,
 				49A70DE81B90A40600129FFD /* BNRItem.h */,
 				49A70DE91B90A40600129FFD /* BNRItem.m */,
 				49A70DEB1B90A50800129FFD /* BNRItemStore.h */,
 				49A70DEC1B90A50800129FFD /* BNRItemStore.m */,
 				49A70DE51B90A18700129FFD /* BNRItemsViewController.h */,
 				49A70DE61B90A18700129FFD /* BNRItemsViewController.m */,
-				49A70DEE1B90AD8600129FFD /* HeaderView.xib */,
 				49A70DCC1B8FD36800129FFD /* Images.xcassets */,
 				49A70DCE1B8FD36800129FFD /* LaunchScreen.xib */,
 				49A70DC91B8FD36800129FFD /* Main.storyboard */,
@@ -220,7 +225,7 @@
 				49A70DCB1B8FD36800129FFD /* Main.storyboard in Resources */,
 				49A70DD01B8FD36800129FFD /* LaunchScreen.xib in Resources */,
 				49A70DCD1B8FD36800129FFD /* Images.xcassets in Resources */,
-				49A70DEF1B90AD8600129FFD /* HeaderView.xib in Resources */,
+				49A70DF71B930BC800129FFD /* BNRDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +246,7 @@
 				49A70DC81B8FD36800129FFD /* ViewController.m in Sources */,
 				49A70DC51B8FD36800129FFD /* AppDelegate.m in Sources */,
 				49A70DEA1B90A40600129FFD /* BNRItem.m in Sources */,
+				49A70DF61B930BC800129FFD /* BNRDetailViewController.m in Sources */,
 				49A70DE71B90A18700129FFD /* BNRItemsViewController.m in Sources */,
 				49A70DC21B8FD36800129FFD /* main.m in Sources */,
 				49A70DED1B90A50800129FFD /* BNRItemStore.m in Sources */,
