@@ -8,6 +8,7 @@
 
 #import "BNRItemStore.h"
 #import "BNRItem.h"
+#import "BNRImageStore.h"
 
 @interface BNRItemStore ()
 //对内定义为可变数组
@@ -62,6 +63,9 @@
 }
 
 - (void)removeItem:(BNRItem *)item{
+    NSString *key = item.itemKey;
+    [[BNRImageStore sharedStore] deleteImageForKey:key];
+    
     [self.privateItems removeObjectIdenticalTo:item];
 }
 
