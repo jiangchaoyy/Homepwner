@@ -67,16 +67,20 @@
 
 - (IBAction)addNewItem:(id)sender{
     BNRItem *item = [[BNRItemStore sharedStore] createItem];
+
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:YES];
+    detailViewController.item = item;
+    detailViewController.dismissBlock = ^{
+        [self.tableView reloadData];
+    };
     
-    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:item];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow
-                                                inSection:0];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
-    [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationTop];
-    
-    //重新加载所有数据
-//    [self.tableView reloadData];
+    [self presentViewController:navController
+                       animated:YES
+                     completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -143,7 +147,7 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:NO];
     
     NSArray *items = [[BNRItemStore sharedStore] allItems];
     BNRItem *selectedItem = items[indexPath.row];

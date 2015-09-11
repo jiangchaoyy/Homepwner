@@ -9,6 +9,7 @@
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
+#import "BNRItemStore.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -24,11 +25,53 @@
 
 @implementation BNRDetailViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    @throw [NSException exceptionWithName:@"Wrong initializer"
+                                   reason:@"Use initForNewItem:"
+                                 userInfo:nil];
+    return nil;
+}
+
+- (instancetype)initForNewItem:(BOOL)isNew{
+    self = [super initWithNibName:nil
+                           bundle:nil];
+    
+    if (self) {
+        if (isNew) {
+            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                      target:self
+                                                                                      action:@selector(save:)];
+            self.navigationItem.rightBarButtonItem = doneItem;
+            
+            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                        target:self
+                                                                                        action:@selector(cancel:)];
+            self.navigationItem.leftBarButtonItem = cancelItem;
+        }
+    }
+    
+    return self;
+}
+
+- (void)save:(id)sender{
+    [self.presentingViewController dismissViewControllerAnimated:YES
+                                                      completion:self.dismissBlock];
+}
+
+- (void)cancel:(id)sender{
+    [[BNRItemStore sharedStore] removeItem:self.item];
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES
+                                                      completion:self.dismissBlock];
+}
+
+#pragma mark - property
 - (void)setItem:(BNRItem *)item{
     _item = item;
     self.navigationItem.title = _item.itemName;
 }
 
+#pragma mark - view event
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -76,6 +119,7 @@
     item.valueInDollars = [self.valueField.text intValue];
 }
 
+#pragma mark - IBAction
 - (IBAction)takePicture:(id)sender {
     if ([self.imagePickerPopover isPopoverVisible]) {
         [self.imagePickerPopover dismissPopoverAnimated:YES];
