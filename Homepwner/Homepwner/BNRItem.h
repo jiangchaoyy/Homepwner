@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BNRItem : NSObject
+@interface BNRItem : NSObject <NSCoding>
 
 @property (nonatomic,copy) NSString *itemName;
 @property (nonatomic,copy) NSString *serialNumber;
-@property (nonatomic) int valueInDollars;
+@property (nonatomic) NSInteger valueInDollars;
 @property (nonatomic,readonly) NSDate *dateCreated;
 @property (nonatomic,copy) NSString *itemKey;
 

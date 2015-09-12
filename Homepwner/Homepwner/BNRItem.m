@@ -66,9 +66,31 @@
     return self;
 }
 
+#pragma mark - NSCoding
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:self.itemName forKey:@"itemName"];
+    [aCoder encodeObject:self.serialNumber forKey:@"serialNumber"];
+    [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
+    [aCoder encodeObject:self.itemKey forKey:@"itemKey"];
+    [aCoder encodeInteger:self.valueInDollars forKey:@"valueInDollars"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self) {
+        _itemName = [aDecoder decodeObjectForKey:@"itemName"];
+        _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
+        _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        _itemKey = [aDecoder decodeObjectForKey:@"itemKey"];
+        _valueInDollars = [aDecoder decodeIntegerForKey:@"valueInDollars"];
+    }
+    
+    return self;
+}
+
 - (NSString *)description{
     NSString *descriptionString =
-    [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%d, recorded on %@d",self.itemName,self.serialNumber,self.valueInDollars,self.dateCreated];
+    [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%ld, recorded on %@d",self.itemName,self.serialNumber,self.valueInDollars,self.dateCreated];
     return descriptionString;
 }
 
