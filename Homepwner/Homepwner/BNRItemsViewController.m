@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRItemStore.h"
 #import "BNRDetailViewController.h"
+#import "BNRItemCell.h"
 
 @interface BNRItemsViewController ()
 
@@ -56,8 +57,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self.tableView registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:@"UITableViewCell"];    
+    UINib *nib = [UINib nibWithNibName:@"BNRItemCell" bundle:nil];
+    
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"BNRItemCell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,14 +100,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
+    BNRItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BNRItemCell"
                                                             forIndexPath:indexPath];
     
     // Configure the cell...
     NSArray *items = [[BNRItemStore sharedStore] allItems];
     BNRItem *item = items[indexPath.row];
     
-    cell.textLabel.text = [item description];
+    cell.nameLabel.text = item.itemName;
+    cell.serialNumberLabel.text = item.serialNumber;
+    cell.valueLabel.text = [NSString stringWithFormat:@"$%ld",(long)item.valueInDollars];
+    cell.thumbnailView.image = item.thumbnail;
     
     return cell;
 }
