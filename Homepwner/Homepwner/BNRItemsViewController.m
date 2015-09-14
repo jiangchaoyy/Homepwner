@@ -11,8 +11,12 @@
 #import "BNRItemStore.h"
 #import "BNRDetailViewController.h"
 #import "BNRItemCell.h"
+#import "BNRImageStore.h"
+#import "BNRImageViewController.h"
 
-@interface BNRItemsViewController ()
+@interface BNRItemsViewController () <UIPopoverControllerDelegate>
+
+@property (nonatomic,strong) UIPopoverController *imagePopover;
 
 @end
 
@@ -110,9 +114,46 @@
     cell.nameLabel.text = item.itemName;
     cell.serialNumberLabel.text = item.serialNumber;
     cell.valueLabel.text = [NSString stringWithFormat:@"$%ld",(long)item.valueInDollars];
+    if (50 <= item.valueInDollars) {
+        cell.valueLabel.textColor = [UIColor greenColor];
+    } else {
+        cell.valueLabel.textColor = [UIColor redColor];
+    }
+    
     cell.thumbnailView.image = item.thumbnail;
     
+    __weak BNRItemCell *blockCell = cell;
+    cell.actionBlock = ^{
+        NSLog(@"Going to show image for %@",item);
+        
+        BNRItemCell *strongCell = blockCell;
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            NSString *itemKey = item.itemKey;
+            
+            UIImage *img = [[BNRImageStore sharedStore] imageForKey:itemKey];
+            if (!img) {
+                return;
+            }
+            
+            CGRect rect = [self.view convertRect:strongCell.thumbnailView.bounds fromView:strongCell.thumbnailView];
+            BNRImageViewController *ivc = [[BNRImageViewController alloc] init];
+            ivc.image = img;
+            
+            self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:ivc];
+            self.imagePopover.popoverContentSize = CGSizeMake(600, 600);
+            [self.imagePopover presentPopoverFromRect:rect
+                                               inView:self.view
+                             permittedArrowDirections:UIPopoverArrowDirectionAny
+                                             animated:YES];
+        }
+    };
+    
     return cell;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    self.imagePopover = nil;
 }
 
 /*
