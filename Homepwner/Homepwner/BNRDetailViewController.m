@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
+#import "BNRAssetTypeViewController.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @property (strong,nonatomic) UIPopoverController *imagePickerPopover;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *assetTypeButton;
 
 @end
 
@@ -93,6 +95,16 @@
     self.navigationItem.title = _item.itemName;
 }
 
+- (IBAction)showAssetTypePicker:(id *)sender {
+    [self.view endEditing:YES];
+    
+    BNRAssetTypeViewController *avc = [[BNRAssetTypeViewController alloc] init];
+    avc.item = self.item;
+    
+    [self.navigationController pushViewController:avc
+                                         animated:YES];
+}
+
 #pragma mark - view event
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -112,7 +124,7 @@
     
     self.nameField.text = item.itemName;
     self.serialNumberField.text = item.serialNumber;
-    self.valueField.text = [NSString stringWithFormat:@"%ld",item.valueInDollars];
+    self.valueField.text = [NSString stringWithFormat:@"%d",item.valueInDollars];
     
     static NSDateFormatter *dateFormatter = nil;
     if (!dateFormatter) {
@@ -124,10 +136,20 @@
     self.dateLabel.text = [dateFormatter stringFromDate:item.dateCreated];
     
     NSString *itemKey = self.item.itemKey;
+    if (itemKey) {
+        UIImage *imageToDisplay = [[BNRImageStore sharedStore] imageForKey:itemKey];
+        
+        self.imageView.image = imageToDisplay;
+    } else {
+        self.imageView.image = nil;
+    }
     
-    UIImage *imageToDisplay = [[BNRImageStore sharedStore] imageForKey:itemKey];
+    NSString *typeLabel = [self.item.assetType valueForKey:@"label"];
+    if (!typeLabel) {
+        typeLabel = @"None";
+    }
     
-    self.imageView.image = imageToDisplay;
+    self.assetTypeButton.title = [NSString stringWithFormat:@"Type: %@",typeLabel];
     
     [self updateFonts];
 }

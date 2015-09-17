@@ -1,30 +1,28 @@
 //
 //  BNRItem.h
-//  RandomItems
+//  Homepwner
 //
-//  Created by jiangchao on 15/8/11.
+//  Created by jiangchao on 15/9/17.
 //  Copyright (c) 2015年 jiangchao. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
-@interface BNRItem : NSObject <NSCoding>
+@class NSManagedObject;
 
-@property (nonatomic,copy) NSString *itemName;
-@property (nonatomic,copy) NSString *serialNumber;
-@property (nonatomic) NSInteger valueInDollars;
-@property (nonatomic,readonly) NSDate *dateCreated;
-@property (nonatomic,copy) NSString *itemKey;
-@property (nonatomic,strong) UIImage *thumbnail;
+@interface BNRItem : NSManagedObject
 
-+ (instancetype)randomItem;
-
-//BNRItem类的制定初始化方法
-- (instancetype)initWithItemName:(NSString *)name
-                  valueInDollars:(int)value
-                    serialNumber:(NSString *)sNumber;
-- (instancetype)initWithItemName:(NSString *)name;
+@property (nonatomic, strong) NSString * itemName;
+@property (nonatomic, strong) NSString * serialNumber;
+@property (nonatomic, strong) NSDate * dateCreated;
+@property (nonatomic, strong) NSString * itemKey;
+@property (nonatomic, strong) UIImage * thumbnail;
+@property (nonatomic, strong) NSData * thumbnailData;
+@property (nonatomic, strong) NSManagedObject *assetType;
+@property (nonatomic) int valueInDollars;
+@property (nonatomic) double orderingValue;
 
 - (void)setThumbnailFromImage:(UIImage *)image;
 

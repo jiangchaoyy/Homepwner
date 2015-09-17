@@ -22,4 +22,6 @@
                 toIndex:(NSInteger)toIndex;
 
 - (BOOL)saveChanges;
+
+- (NSArray *)allAssetTypes;
 @end
