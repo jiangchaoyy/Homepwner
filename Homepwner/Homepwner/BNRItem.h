@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSDate * dateCreated;
 @property (nonatomic, strong) NSString * itemKey;
 @property (nonatomic, strong) UIImage * thumbnail;
-@property (nonatomic, strong) NSData * thumbnailData;
 @property (nonatomic, strong) NSManagedObject *assetType;
 @property (nonatomic) int valueInDollars;
 @property (nonatomic) double orderingValue;

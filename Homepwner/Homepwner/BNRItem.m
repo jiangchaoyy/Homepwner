@@ -10,7 +10,14 @@
 
 @implementation BNRItem
 
-@synthesize itemName,itemKey,serialNumber,thumbnail,thumbnailData,valueInDollars,orderingValue,dateCreated,assetType;
+@dynamic itemName;
+@dynamic serialNumber;
+@dynamic dateCreated;
+@dynamic itemKey;
+@dynamic thumbnail;
+@dynamic assetType;
+@dynamic valueInDollars;
+@dynamic orderingValue;
 
 - (void)awakeFromInsert{
     [super awakeFromInsert];
