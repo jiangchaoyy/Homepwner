@@ -11,6 +11,7 @@
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
 #import "BNRAssetTypeViewController.h"
+#import "AppDelegate.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UIPopoverControllerDelegate,NSCoding>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -136,7 +137,7 @@
     
     self.nameField.text = item.itemName;
     self.serialNumberField.text = item.serialNumber;
-    self.valueField.text = [NSString stringWithFormat:@"%d",item.valueInDollars];
+    self.valueField.text = [NSString stringWithFormat:@"%ld",(long)item.valueInDollars];
     
     static NSDateFormatter *dateFormatter = nil;
     if (!dateFormatter) {
@@ -174,7 +175,15 @@
     BNRItem *item = self.item;
     item.itemName = self.nameField.text;
     item.serialNumber = self.serialNumberField.text;
-    item.valueInDollars = [self.valueField.text intValue];
+//    item.valueInDollars = [self.valueField.text intValue];
+    NSInteger newValue = [self.valueField.text intValue];
+    
+    if (newValue != item.valueInDollars) {
+        item.valueInDollars = newValue;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:newValue
+                      forKey:BNRNextItemValuePrefsKey];
+    }
 }
 
 #pragma mark - IBAction

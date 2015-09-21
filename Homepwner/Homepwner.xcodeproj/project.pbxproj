@@ -25,6 +25,7 @@
 		49AB83D91BAAF75B00E814B4 /* BNRImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB83D81BAAF75B00E814B4 /* BNRImageTransformer.m */; };
 		49AB83DC1BAAFEE700E814B4 /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB83DB1BAAFEE700E814B4 /* BNRItem.m */; };
 		49AB83DF1BAB10B100E814B4 /* BNRAssetTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AB83DE1BAB10B100E814B4 /* BNRAssetTypeViewController.m */; };
+		49AB83E31BB0461300E814B4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49AB83E21BB0461300E814B4 /* Settings.bundle */; };
 		49DC28FB1BA70F6F00EDF0F9 /* BNRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DC28FA1BA70F6F00EDF0F9 /* BNRImageViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,9 @@
 		49AB83DB1BAAFEE700E814B4 /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		49AB83DD1BAB10B100E814B4 /* BNRAssetTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRAssetTypeViewController.h; sourceTree = "<group>"; };
 		49AB83DE1BAB10B100E814B4 /* BNRAssetTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRAssetTypeViewController.m; sourceTree = "<group>"; };
+		49AB83E01BAEF23F00E814B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		49AB83E11BAEF23F00E814B4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		49AB83E21BB0461300E814B4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		49DC28F91BA70F6F00EDF0F9 /* BNRImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageViewController.h; sourceTree = "<group>"; };
 		49DC28FA1BA70F6F00EDF0F9 /* BNRImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +120,7 @@
 			children = (
 				49A70DC31B8FD36800129FFD /* AppDelegate.h */,
 				49A70DC41B8FD36800129FFD /* AppDelegate.m */,
+				49AB83E21BB0461300E814B4 /* Settings.bundle */,
 				49AB83DD1BAB10B100E814B4 /* BNRAssetTypeViewController.h */,
 				49AB83DE1BAB10B100E814B4 /* BNRAssetTypeViewController.m */,
 				49A70DF31B930BC800129FFD /* BNRDetailViewController.h */,
@@ -257,6 +262,7 @@
 				49A70DD01B8FD36800129FFD /* LaunchScreen.xib in Resources */,
 				49A70DCD1B8FD36800129FFD /* Images.xcassets in Resources */,
 				49A70DF71B930BC800129FFD /* BNRDetailViewController.xib in Resources */,
+				49AB83E31BB0461300E814B4 /* Settings.bundle in Resources */,
 				493050941BA5AEB400E28065 /* BNRItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +320,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				49A70DCA1B8FD36800129FFD /* Base */,
+				49AB83E11BAEF23F00E814B4 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -322,6 +329,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				49A70DCF1B8FD36800129FFD /* Base */,
+				49AB83E01BAEF23F00E814B4 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString * itemKey;
 @property (nonatomic, strong) UIImage * thumbnail;
 @property (nonatomic, strong) NSManagedObject *assetType;
-@property (nonatomic) int valueInDollars;
+@property (nonatomic) NSInteger valueInDollars;
 @property (nonatomic) double orderingValue;
 
 - (void)setThumbnailFromImage:(UIImage *)image;

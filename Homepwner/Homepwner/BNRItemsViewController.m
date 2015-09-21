@@ -95,9 +95,18 @@
                selector:@selector(updateTableViewForDynamicTypeSize)
                    name:UIContentSizeCategoryDidChangeNotification
                  object:nil];
+        
+        [nc addObserver:self
+               selector:@selector(localeChanged:)
+                   name:NSCurrentLocaleDidChangeNotification
+                 object:nil];
     }
     
     return self;
+}
+
+- (void)localeChanged:(NSNotification *)note{
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -173,7 +182,16 @@
     
     cell.nameLabel.text = item.itemName;
     cell.serialNumberLabel.text = item.serialNumber;
-    cell.valueLabel.text = [NSString stringWithFormat:@"$%ld",(long)item.valueInDollars];
+    
+    static NSNumberFormatter *currencyFormatter = nil;
+    if (currencyFormatter == nil) {
+        currencyFormatter =[[NSNumberFormatter alloc] init];
+        currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    }
+    
+//    cell.valueLabel.text = [NSString stringWithFormat:@"$%ld",(long)item.valueInDollars];
+    cell.valueLabel.text = [currencyFormatter stringFromNumber:@(item.valueInDollars)];
+    
     if (50 <= item.valueInDollars) {
         cell.valueLabel.textColor = [UIColor greenColor];
     } else {
